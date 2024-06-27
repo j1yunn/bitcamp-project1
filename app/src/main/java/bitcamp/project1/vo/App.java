@@ -45,7 +45,7 @@ public class App {
 
     private static void printMainMenu() {
         System.out.println("********************************");
-        System.out.println("**           가계부           **");
+        System.out.println("             가계부             ");
         System.out.println("********************************");
         System.out.println("1. 입력");
         System.out.println("2. 내역");
@@ -57,7 +57,7 @@ public class App {
     private static void inputMenu(AccountBook accountBook, Scanner scanner) {
         while (true) {
             System.out.println("********************************");
-            System.out.println("**           [입력]           **");
+            System.out.println("              입력              ");
             System.out.println("********************************");
             System.out.println("1. 수입 추가");
             System.out.println("2. 지출 추가");
@@ -91,7 +91,7 @@ public class App {
     private static void historyMenu(AccountBook accountBook, Scanner scanner) {
         while (true) {
             System.out.println("********************************");
-            System.out.println("**           [내역]           **");
+            System.out.println("              내역              ");
             System.out.println("********************************");
             System.out.println("1. 내역 보기");
             System.out.println("2. 내역 수정");
@@ -129,7 +129,7 @@ public class App {
     private static void summaryMenu(AccountBook accountBook, Scanner scanner) {
         while (true) {
             System.out.println("********************************");
-            System.out.println("**           [합계]           **");
+            System.out.println("              합계              ");
             System.out.println("********************************");
             System.out.println("1. 합계 보기");
             System.out.println("2. 초기화");
