@@ -12,12 +12,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("옵션을 선택하세요: ");
-            System.out.println("1. 입력");
-            System.out.println("2. 내역");
-            System.out.println("3. 합계");
-            System.out.println("4. 종료");
-
+            printMainMenu();
             try {
                 int mainChoice = scanner.nextInt();
                 scanner.nextLine();  // 개행 문자 소비
@@ -48,12 +43,26 @@ public class App {
         }
     }
 
+    private static void printMainMenu() {
+        System.out.println("********************************");
+        System.out.println("**           가계부           **");
+        System.out.println("********************************");
+        System.out.println("1. 입력");
+        System.out.println("2. 내역");
+        System.out.println("3. 합계");
+        System.out.println("4. 종료");
+        System.out.println("********************************");
+    }
+
     private static void inputMenu(AccountBook accountBook, Scanner scanner) {
         while (true) {
-            System.out.println("[입력]");
+            System.out.println("********************************");
+            System.out.println("**           [입력]           **");
+            System.out.println("********************************");
             System.out.println("1. 수입 추가");
             System.out.println("2. 지출 추가");
             System.out.println("3. 이전");
+            System.out.println("********************************");
 
             try {
                 int choice = scanner.nextInt();
@@ -81,11 +90,14 @@ public class App {
 
     private static void historyMenu(AccountBook accountBook, Scanner scanner) {
         while (true) {
-            System.out.println("[내역]");
+            System.out.println("********************************");
+            System.out.println("**           [내역]           **");
+            System.out.println("********************************");
             System.out.println("1. 내역 보기");
             System.out.println("2. 내역 수정");
             System.out.println("3. 내역 삭제");
             System.out.println("4. 이전");
+            System.out.println("********************************");
 
             try {
                 int choice = scanner.nextInt();
@@ -116,10 +128,13 @@ public class App {
 
     private static void summaryMenu(AccountBook accountBook, Scanner scanner) {
         while (true) {
-            System.out.println("[합계]");
+            System.out.println("********************************");
+            System.out.println("**           [합계]           **");
+            System.out.println("********************************");
             System.out.println("1. 합계 보기");
             System.out.println("2. 초기화");
             System.out.println("3. 이전");
+            System.out.println("********************************");
 
             try {
                 int choice = scanner.nextInt();
@@ -131,6 +146,7 @@ public class App {
                         break;
                     case 2:
                         accountBook.resetSummary();
+                        System.out.println("합계가 초기화되었습니다.");
                         break;
                     case 3:
                         return;  // 이전 메뉴로 돌아감
@@ -178,7 +194,7 @@ public class App {
                 transaction.setDescription(newDescription);
                 accountBook.updateTransaction(index - 1, transaction);
 
-                // Update summary for modified transaction
+                // 수정된 거래의 종류에 따라 합계를 업데이트합니다.
                 if (transaction.getType().equals("수입")) {
                     accountBook.updateSummary(transaction);
                     accountBook.updateSummary(new Transaction(transaction.getDate(), "수입", -oldAmount, ""));
