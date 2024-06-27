@@ -47,10 +47,10 @@ public class App {
         System.out.println("********************************");
         System.out.println("             가계부             ");
         System.out.println("********************************");
-        System.out.println("1. 입력");
-        System.out.println("2. 내역");
-        System.out.println("3. 합계");
-        System.out.println("4. 종료");
+        System.out.println("   1. 입력                      ");
+        System.out.println("   2. 내역                      ");
+        System.out.println("   3. 합계                      ");
+        System.out.println("   4. 종료                      ");
         System.out.println("********************************");
     }
 
@@ -59,9 +59,9 @@ public class App {
             System.out.println("********************************");
             System.out.println("              입력              ");
             System.out.println("********************************");
-            System.out.println("1. 수입 추가");
-            System.out.println("2. 지출 추가");
-            System.out.println("3. 이전");
+            System.out.println("   1. 수입 추가                 ");
+            System.out.println("   2. 지출 추가                 ");
+            System.out.println("   3. 이전                      ");
             System.out.println("********************************");
 
             try {
@@ -93,10 +93,10 @@ public class App {
             System.out.println("********************************");
             System.out.println("              내역              ");
             System.out.println("********************************");
-            System.out.println("1. 내역 보기");
-            System.out.println("2. 내역 수정");
-            System.out.println("3. 내역 삭제");
-            System.out.println("4. 이전");
+            System.out.println("   1. 내역 보기                 ");
+            System.out.println("   2. 내역 수정                 ");
+            System.out.println("   3. 내역 삭제                 ");
+            System.out.println("   4. 이전                      ");
             System.out.println("********************************");
 
             try {
@@ -131,9 +131,9 @@ public class App {
             System.out.println("********************************");
             System.out.println("              합계              ");
             System.out.println("********************************");
-            System.out.println("1. 합계 보기");
-            System.out.println("2. 초기화");
-            System.out.println("3. 이전");
+            System.out.println("               1. 합계 보기     ");
+            System.out.println("                  2. 초기화     ");
+            System.out.println("                    3. 이전     ");
             System.out.println("********************************");
 
             try {
