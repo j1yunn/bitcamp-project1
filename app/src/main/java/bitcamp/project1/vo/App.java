@@ -131,9 +131,9 @@ public class App {
             System.out.println("********************************");
             System.out.println("              합계              ");
             System.out.println("********************************");
-            System.out.println("               1. 합계 보기     ");
-            System.out.println("                  2. 초기화     ");
-            System.out.println("                    3. 이전     ");
+            System.out.println("   1. 합계 보기                 ");
+            System.out.println("   2. 초기화                    ");
+            System.out.println("   3. 이전                      ");
             System.out.println("********************************");
 
             try {
