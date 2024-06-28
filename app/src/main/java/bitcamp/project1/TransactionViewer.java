@@ -13,28 +13,30 @@ public class TransactionViewer {
     }
 
     public void viewTransactions() {
-        System.out.println("********************************");
-        System.out.println("              \033[1m\033[31m내역\033[0m               ");
-        System.out.println("********************************");
-        System.out.println("1. 전체 거래 보기");
-        System.out.println("2. 특정 날짜 범위의 거래 보기");
-        System.out.println("3. 수입만 보기");
-        System.out.println("4. 지출만 보기");
-        System.out.println("5. 총 수입/지출 보기");
-        System.out.println("6. 이전");
-        System.out.println("********************************");
-        System.out.print("입력: ");
+        while (true) {
+            System.out.println("********************************");
+            System.out.println("              \033[1m\033[31m내역\033[0m               ");
+            System.out.println("********************************");
+            System.out.println("1. 전체 거래 보기");
+            System.out.println("2. 특정 날짜 범위의 거래 보기");
+            System.out.println("3. 수입만 보기");
+            System.out.println("4. 지출만 보기");
+            System.out.println("5. 총 수입/지출 보기");
+            System.out.println("6. 이전");
+            System.out.println("********************************");
+            System.out.print("입력: ");
 
-        int viewChoice = getUserChoice();
-        if (viewChoice == 6) return;
+            int viewChoice = getUserChoice();
+            if (viewChoice == 6) return;
 
-        switch (viewChoice) {
-            case 1 -> printAllTransactions(accountBook);
-            case 2 -> printTransactionsByDateRange();
-            case 3 -> printTransactionsByType("수입");
-            case 4 -> printTransactionsByType("지출");
-            case 5 -> printTotalIncomeAndExpense();
-            default -> System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+            switch (viewChoice) {
+                case 1 -> printAllTransactions(accountBook);
+                case 2 -> printTransactionsByDateRange();
+                case 3 -> viewTransactionsByType("수입");
+                case 4 -> viewTransactionsByType("지출");
+                case 5 -> printTotalIncomeAndExpense();
+                default -> System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+            }
         }
     }
 
@@ -65,10 +67,47 @@ public class TransactionViewer {
         }
     }
 
+    private void viewTransactionsByType(String type) {
+        while (true) {
+            System.out.println("********************************");
+            System.out.println("          \033[1m\033[31m" + type + " 보기\033[0m           ");
+            System.out.println("********************************");
+            System.out.println("1. 전체 " + type + " 보기");
+            System.out.println("2. 특정 날짜 범위의 " + type + " 보기");
+            System.out.println("3. 이전");
+            System.out.println("********************************");
+            System.out.print("입력: ");
+
+            int typeChoice = getUserChoice();
+            if (typeChoice == 3) return;
+
+            switch (typeChoice) {
+                case 1 -> printTransactionsByType(type);
+                case 2 -> printTransactionsByTypeAndDateRange(type);
+                default -> System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+            }
+        }
+    }
+
     private void printTransactionsByType(String type) {
         System.out.println(type + " 목록:");
         for (Transaction t : accountBook.getTransactionsByType(type)) {
             System.out.println(t);
+        }
+    }
+
+    private void printTransactionsByTypeAndDateRange(String type) {
+        try {
+            System.out.print("시작 날짜 (YYYY-MM-DD): ");
+            LocalDate startDate = LocalDate.parse(scanner.nextLine());
+            System.out.print("끝 날짜 (YYYY-MM-DD): ");
+            LocalDate endDate = LocalDate.parse(scanner.nextLine());
+            System.out.println(type + " 목록:");
+            for (Transaction t : accountBook.getTransactionsByTypeAndDateRange(type, startDate, endDate)) {
+                System.out.println(t);
+            }
+        } catch (Exception e) {
+            System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
         }
     }
 
@@ -81,11 +120,13 @@ public class TransactionViewer {
     }
 
     private int getUserChoice() {
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
-            return -1;
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
+                System.out.print("입력: ");
+            }
         }
     }
 }

@@ -25,6 +25,12 @@ public class TransactionManager {
         int addChoice = getUserChoice();
         if (addChoice == 3) return;
 
+        while (addChoice < 1 || addChoice > 3) {
+            System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            System.out.print("입력: ");
+            addChoice = getUserChoice();
+        }
+
         try {
             Transaction transaction = createTransaction(addChoice);
             accountBook.addTransaction(transaction);
@@ -34,10 +40,26 @@ public class TransactionManager {
     }
 
     private Transaction createTransaction(int addChoice) {
-        System.out.print("날짜 (YYYY-MM-DD): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
-        System.out.print("금액: ");
-        double amount = Double.parseDouble(scanner.nextLine());
+        LocalDate date = null;
+        while (date == null) {
+            try {
+                System.out.print("날짜 (YYYY-MM-DD): ");
+                date = LocalDate.parse(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            }
+        }
+
+        Double amount = null;
+        while (amount == null) {
+            try {
+                System.out.print("금액: ");
+                amount = Double.parseDouble(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            }
+        }
+
         String type = (addChoice == 1) ? "수입" : "지출";
         System.out.print("설명: ");
         String description = scanner.nextLine();
@@ -105,21 +127,45 @@ public class TransactionManager {
     }
 
     private LocalDate getUpdatedDate(LocalDate originalDate) {
-        System.out.print("새 날짜 (YYYY-MM-DD, 이전 값: " + originalDate + "): ");
-        String dateInput = scanner.nextLine();
-        return dateInput.isEmpty() ? originalDate : LocalDate.parse(dateInput);
+        LocalDate date = null;
+        while (date == null) {
+            try {
+                System.out.print("새 날짜 (YYYY-MM-DD, 이전 값: " + originalDate + "): ");
+                String dateInput = scanner.nextLine();
+                date = dateInput.isEmpty() ? originalDate : LocalDate.parse(dateInput);
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            }
+        }
+        return date;
     }
 
     private double getUpdatedAmount(double originalAmount) {
-        System.out.print("새 금액 (이전 값: " + String.format("%.0f", originalAmount) + "원): ");
-        String amountInput = scanner.nextLine();
-        return amountInput.isEmpty() ? originalAmount : Double.parseDouble(amountInput);
+        Double amount = null;
+        while (amount == null) {
+            try {
+                System.out.print("새 금액 (이전 값: " + String.format("%.0f", originalAmount) + "원): ");
+                String amountInput = scanner.nextLine();
+                amount = amountInput.isEmpty() ? originalAmount : Double.parseDouble(amountInput);
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            }
+        }
+        return amount;
     }
 
     private String getUpdatedType(String originalType) {
-        System.out.print("새 유형 (수입/지출, 이전 값: " + originalType + "): ");
-        String typeInput = scanner.nextLine();
-        return typeInput.isEmpty() ? originalType : typeInput;
+        String type = null;
+        while (type == null) {
+            try {
+                System.out.print("새 유형 (수입/지출, 이전 값: " + originalType + "): ");
+                String typeInput = scanner.nextLine();
+                type = typeInput.isEmpty() ? originalType : typeInput;
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            }
+        }
+        return type;
     }
 
     private String getUpdatedDescription(String originalDescription) {
@@ -129,11 +175,13 @@ public class TransactionManager {
     }
 
     private int getUserChoice() {
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
-            return -1;
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
+                System.out.print("입력: ");
+            }
         }
     }
 }
