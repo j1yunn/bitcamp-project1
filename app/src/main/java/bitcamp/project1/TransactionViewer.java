@@ -117,7 +117,6 @@ public class TransactionViewer {
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
             return -1;
         }
     }

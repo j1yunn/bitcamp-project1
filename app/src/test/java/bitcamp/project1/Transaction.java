@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Transaction {
     private LocalDate date;
-    private double amount;
+    private int amount;
     private String type; // "수입" 또는 "지출"
     private String description;
 
-    public Transaction(LocalDate date, double amount, String type, String description) {
+    public Transaction(LocalDate date, int amount, String type, String description) {
         this.date = date;
         this.amount = amount;
         this.type = type;
@@ -19,7 +19,7 @@ public class Transaction {
         return date;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -33,11 +33,9 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "date=" + date +
-                ", amount=" + String.format("%.0f원", amount) +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "날짜: " + date +
+                ", 금액: " + amount + "원" +
+                ", 유형: " + type +
+                ", 설명: " + description;
     }
 }
