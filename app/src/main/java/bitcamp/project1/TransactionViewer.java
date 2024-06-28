@@ -18,8 +18,8 @@ public class TransactionViewer {
         System.out.println("3. 수입만 보기");
         System.out.println("4. 지출만 보기");
         System.out.println("5. 총 수입/지출 보기");
-        System.out.println("6. 이전으로 돌아가기");
-        System.out.print("선택: ");
+        System.out.println("6. 이전");
+        System.out.print("입력: ");
 
         int viewChoice = getUserChoice();
         if (viewChoice == 6) return;

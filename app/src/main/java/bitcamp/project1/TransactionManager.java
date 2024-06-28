@@ -15,8 +15,8 @@ public class TransactionManager {
     public void addTransaction() {
         System.out.println("1. 수입 추가");
         System.out.println("2. 지출 추가");
-        System.out.println("3. 이전으로 돌아가기");
-        System.out.print("선택: ");
+        System.out.println("3. 이전");
+        System.out.print("입력: ");
 
         int addChoice = getUserChoice();
         if (addChoice == 3) return;
