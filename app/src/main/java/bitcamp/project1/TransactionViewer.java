@@ -13,12 +13,16 @@ public class TransactionViewer {
     }
 
     public void viewTransactions() {
+        System.out.println("********************************");
+        System.out.println("              \033[1m\033[31m내역\033[0m               ");
+        System.out.println("********************************");
         System.out.println("1. 전체 거래 보기");
         System.out.println("2. 특정 날짜 범위의 거래 보기");
         System.out.println("3. 수입만 보기");
         System.out.println("4. 지출만 보기");
         System.out.println("5. 총 수입/지출 보기");
         System.out.println("6. 이전");
+        System.out.println("********************************");
         System.out.print("입력: ");
 
         int viewChoice = getUserChoice();
@@ -53,9 +57,9 @@ public class TransactionViewer {
             }
             double totalIncome = accountBook.getTotalIncomeByDateRange(startDate, endDate);
             double totalExpense = accountBook.getTotalExpenseByDateRange(startDate, endDate);
-            System.out.println("특정 기간 내 총 수입: " + String.format("%.0f", totalIncome));
-            System.out.println("특정 기간 내 총 지출: " + String.format("%.0f", totalExpense));
-            System.out.println("특정 기간 내 합계: " + String.format("%.0f", (totalIncome - totalExpense)));
+            System.out.println("특정 기간 내 총 수입: " + String.format("%.0f원", totalIncome));
+            System.out.println("특정 기간 내 총 지출: " + String.format("%.0f원", totalExpense));
+            System.out.println("특정 기간 내 합계: " + String.format("%.0f원", (totalIncome - totalExpense)));
         } catch (Exception e) {
             System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
         }
@@ -71,9 +75,9 @@ public class TransactionViewer {
     private void printTotalIncomeAndExpense() {
         double totalIncome = accountBook.getTotalIncome();
         double totalExpense = accountBook.getTotalExpense();
-        System.out.println("총 수입: " + String.format("%.0f", totalIncome));
-        System.out.println("총 지출: " + String.format("%.0f", totalExpense));
-        System.out.println("합계: " + String.format("%.0f", (totalIncome - totalExpense)));
+        System.out.println("총 수입: " + String.format("%.0f원", totalIncome));
+        System.out.println("총 지출: " + String.format("%.0f원", totalExpense));
+        System.out.println("합계: " + String.format("%.0f원", (totalIncome - totalExpense)));
     }
 
     private int getUserChoice() {

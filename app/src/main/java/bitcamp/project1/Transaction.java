@@ -34,7 +34,7 @@ public class Transaction {
     @Override
     public String toString() {
         return "날짜: " + date +
-                ", 금액: " + (amount % 1 == 0 ? String.format("%.0f", amount) : String.format("%.2f", amount)) +
+                ", 금액: " + String.format("%.0f원", amount) +
                 ", 유형: " + type +
                 ", 설명: " + description;
     }

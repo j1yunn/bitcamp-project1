@@ -27,15 +27,11 @@ public class AppTest {
     }
 
     private static void printMainMenu() {
-        System.out.println("********************************");
-        System.out.println("             \033[1m\033[31m가계부\033[0m              ");
-        System.out.println("********************************");
-        System.out.println("1. 추가");
-        System.out.println("2. 내역");
-        System.out.println("3. 수정");
+        System.out.println("1. 거래 추가");
+        System.out.println("2. 거래 목록 보기");
+        System.out.println("3. 거래 수정");
         System.out.println("4. 종료");
-        System.out.println("********************************");
-        System.out.print("입력: ");
+        System.out.print("선택: ");
     }
 
     private static int getUserChoice() {

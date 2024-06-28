@@ -33,9 +33,11 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "날짜: " + date +
-                ", 금액: " + String.format("%.0f원", amount) +
-                ", 유형: " + type +
-                ", 설명: " + description;
+        return "Transaction{" +
+                "date=" + date +
+                ", amount=" + String.format("%.0f원", amount) +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
