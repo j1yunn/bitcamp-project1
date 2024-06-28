@@ -13,13 +13,17 @@ public class TransactionViewer {
     }
 
     public void viewTransactions() {
+        System.out.println("********************************");
+        System.out.println("              \033[1m\033[31m내역\033[0m               ");
+        System.out.println("********************************");
         System.out.println("1. 전체 거래 보기");
         System.out.println("2. 특정 날짜 범위의 거래 보기");
         System.out.println("3. 수입만 보기");
         System.out.println("4. 지출만 보기");
         System.out.println("5. 총 수입/지출 보기");
-        System.out.println("6. 이전으로 돌아가기");
-        System.out.print("선택: ");
+        System.out.println("6. 이전");
+        System.out.println("********************************");
+        System.out.print("입력: ");
 
         int viewChoice = getUserChoice();
         if (viewChoice == 6) return;
