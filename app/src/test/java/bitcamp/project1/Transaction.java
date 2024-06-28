@@ -1,4 +1,4 @@
-package bitcamp.project1.util;
+package bitcamp.project1;
 
 import java.time.LocalDate;
 
@@ -34,10 +34,10 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "날짜=" + date +
-                ", 금액=" + (amount % 1 == 0 ? String.format("%.0f", amount) : String.format("%.2f", amount)) +
-                ", 유형='" + type + '\'' +
-                ", 설명='" + description + '\'' +
+                "date=" + date +
+                ", amount=" + String.format("%.0f원", amount) +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

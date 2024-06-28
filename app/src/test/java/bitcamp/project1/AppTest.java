@@ -27,9 +27,9 @@ public class AppTest {
     }
 
     private static void printMainMenu() {
-        System.out.println("1. 항목 추가");
-        System.out.println("2. 목록 열람");
-        System.out.println("3. 항목 수정");
+        System.out.println("1. 거래 추가");
+        System.out.println("2. 거래 목록 보기");
+        System.out.println("3. 거래 수정");
         System.out.println("4. 종료");
         System.out.print("선택: ");
     }

@@ -1,5 +1,8 @@
 package bitcamp.project1;
 
+import bitcamp.project1.AccountBook;
+import bitcamp.project1.Transaction;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -104,7 +107,7 @@ public class TransactionManager {
     }
 
     private double getUpdatedAmount(double originalAmount) {
-        System.out.print("새 금액 (이전 값: " + originalAmount + "): ");
+        System.out.print("새 금액 (이전 값: " + String.format("%.0f", originalAmount) + "원): ");
         String amountInput = scanner.nextLine();
         return amountInput.isEmpty() ? originalAmount : Double.parseDouble(amountInput);
     }

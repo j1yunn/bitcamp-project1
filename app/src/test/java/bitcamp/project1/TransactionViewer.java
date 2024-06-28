@@ -53,9 +53,9 @@ public class TransactionViewer {
             }
             double totalIncome = accountBook.getTotalIncomeByDateRange(startDate, endDate);
             double totalExpense = accountBook.getTotalExpenseByDateRange(startDate, endDate);
-            System.out.println("특정 기간 내 총 수입: " + String.format("%.0f", totalIncome));
-            System.out.println("특정 기간 내 총 지출: " + String.format("%.0f", totalExpense));
-            System.out.println("특정 기간 내 합계: " + String.format("%.0f", (totalIncome - totalExpense)));
+            System.out.println("특정 기간 내 총 수입: " + String.format("%.0f원", totalIncome));
+            System.out.println("특정 기간 내 총 지출: " + String.format("%.0f원", totalExpense));
+            System.out.println("특정 기간 내 합계: " + String.format("%.0f원", (totalIncome - totalExpense)));
         } catch (Exception e) {
             System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
         }
@@ -71,9 +71,9 @@ public class TransactionViewer {
     private void printTotalIncomeAndExpense() {
         double totalIncome = accountBook.getTotalIncome();
         double totalExpense = accountBook.getTotalExpense();
-        System.out.println("총 수입: " + String.format("%.0f", totalIncome));
-        System.out.println("총 지출: " + String.format("%.0f", totalExpense));
-        System.out.println("합계: " + String.format("%.0f", (totalIncome - totalExpense)));
+        System.out.println("총 수입: " + String.format("%.0f원", totalIncome));
+        System.out.println("총 지출: " + String.format("%.0f원", totalExpense));
+        System.out.println("합계: " + String.format("%.0f원", (totalIncome - totalExpense)));
     }
 
     private int getUserChoice() {
