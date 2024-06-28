@@ -4,7 +4,7 @@ import bitcamp.project1.util.AccountBook;
 
 import java.util.Scanner;
 
-1public class AppTest {
+public class AppTest {
     private static final Scanner scanner = new Scanner(System.in);
     private static final AccountBook accountBook = new AccountBook();
     private static final TransactionManager transactionManager = new TransactionManager(scanner, accountBook);

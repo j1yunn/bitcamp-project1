@@ -34,10 +34,10 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "date=" + date +
-                ", amount=" + (amount % 1 == 0 ? String.format("%.0f", amount) : String.format("%.2f", amount)) +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
+                "날짜=" + date +
+                ", 금액=" + (amount % 1 == 0 ? String.format("%.0f", amount) : String.format("%.2f", amount)) +
+                ", 유형='" + type + '\'' +
+                ", 설명='" + description + '\'' +
                 '}';
     }
 }
