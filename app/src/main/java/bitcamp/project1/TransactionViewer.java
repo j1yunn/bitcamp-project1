@@ -1,6 +1,7 @@
 package bitcamp.project1;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class TransactionViewer {
@@ -49,10 +50,8 @@ public class TransactionViewer {
 
     private void printTransactionsByDateRange() {
         try {
-            System.out.print("시작 날짜 (YYYY-MM-DD): ");
-            LocalDate startDate = LocalDate.parse(scanner.nextLine());
-            System.out.print("끝 날짜 (YYYY-MM-DD): ");
-            LocalDate endDate = LocalDate.parse(scanner.nextLine());
+            LocalDate startDate = getDateFromUser("시작");
+            LocalDate endDate = getDateFromUser("끝");
             System.out.println("거래 목록:");
             for (Transaction t : accountBook.getTransactionsByDateRange(startDate, endDate)) {
                 System.out.println(t);
@@ -62,8 +61,8 @@ public class TransactionViewer {
             System.out.println("특정 기간 내 총 수입: " + String.format("%.0f원", totalIncome));
             System.out.println("특정 기간 내 총 지출: " + String.format("%.0f원", totalExpense));
             System.out.println("특정 기간 내 합계: " + String.format("%.0f원", (totalIncome - totalExpense)));
-        } catch (Exception e) {
-            System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+        } catch (DateTimeParseException e) {
+            System.out.println("잘못된 입력입니다. 날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
         }
     }
 
@@ -78,36 +77,31 @@ public class TransactionViewer {
             System.out.println("********************************");
             System.out.print("입력: ");
 
-            int typeChoice = getUserChoice();
-            if (typeChoice == 3) return;
+            int choice = getUserChoice();
+            if (choice == 3) return;
 
-            switch (typeChoice) {
-                case 1 -> printTransactionsByType(type);
-                case 2 -> printTransactionsByTypeAndDateRange(type);
+            switch (choice) {
+                case 1 -> printTransactionsByType(type, null, null);
+                case 2 -> printTransactionsByType(type, getDateFromUser("시작"), getDateFromUser("끝"));
                 default -> System.out.println("잘못된 선택입니다. 다시 시도하세요.");
             }
         }
     }
 
-    private void printTransactionsByType(String type) {
+    private void printTransactionsByType(String type, LocalDate startDate, LocalDate endDate) {
         System.out.println(type + " 목록:");
-        for (Transaction t : accountBook.getTransactionsByType(type)) {
-            System.out.println(t);
-        }
-    }
-
-    private void printTransactionsByTypeAndDateRange(String type) {
-        try {
-            System.out.print("시작 날짜 (YYYY-MM-DD): ");
-            LocalDate startDate = LocalDate.parse(scanner.nextLine());
-            System.out.print("끝 날짜 (YYYY-MM-DD): ");
-            LocalDate endDate = LocalDate.parse(scanner.nextLine());
-            System.out.println(type + " 목록:");
+        if (startDate == null || endDate == null) {
+            for (Transaction t : accountBook.getTransactionsByType(type)) {
+                System.out.println(t);
+            }
+        } else {
             for (Transaction t : accountBook.getTransactionsByTypeAndDateRange(type, startDate, endDate)) {
                 System.out.println(t);
             }
-        } catch (Exception e) {
-            System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            double total = type.equals("수입") ?
+                    accountBook.getTotalIncomeByDateRange(startDate, endDate) :
+                    accountBook.getTotalExpenseByDateRange(startDate, endDate);
+            System.out.println("특정 기간 내 총 " + type + ": " + String.format("%.0f원", total));
         }
     }
 
@@ -120,12 +114,21 @@ public class TransactionViewer {
     }
 
     private int getUserChoice() {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
+            return -1;
+        }
+    }
+
+    private LocalDate getDateFromUser(String prefix) {
         while (true) {
             try {
-                return Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
-                System.out.print("입력: ");
+                System.out.print(prefix + " 날짜 (YYYY-MM-DD): ");
+                return LocalDate.parse(scanner.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("잘못된 입력입니다. 날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
             }
         }
     }

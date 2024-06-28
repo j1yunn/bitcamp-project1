@@ -1,6 +1,7 @@
 package bitcamp.project1;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class TransactionManager {
@@ -13,57 +14,48 @@ public class TransactionManager {
     }
 
     public void addTransaction() {
-        System.out.println("********************************");
-        System.out.println("              \033[1m\033[31m추가\033[0m               ");
-        System.out.println("********************************");
-        System.out.println("1. 수입 추가");
-        System.out.println("2. 지출 추가");
-        System.out.println("3. 이전");
-        System.out.println("********************************");
-        System.out.print("입력: ");
-
-        int addChoice = getUserChoice();
-        if (addChoice == 3) return;
-
-        while (addChoice < 1 || addChoice > 3) {
-            System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+        while (true) {
+            System.out.println("********************************");
+            System.out.println("              \033[1m\033[31m추가\033[0m               ");
+            System.out.println("********************************");
+            System.out.println("1. 수입 추가");
+            System.out.println("2. 지출 추가");
+            System.out.println("3. 이전");
+            System.out.println("********************************");
             System.out.print("입력: ");
-            addChoice = getUserChoice();
-        }
 
-        try {
-            Transaction transaction = createTransaction(addChoice);
-            accountBook.addTransaction(transaction);
-        } catch (Exception e) {
-            System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            int addChoice = getUserChoice();
+            if (addChoice == 3) return;
+
+            try {
+                Transaction transaction = createTransaction(addChoice);
+                accountBook.addTransaction(transaction);
+                break;
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+            }
         }
     }
 
     private Transaction createTransaction(int addChoice) {
-        LocalDate date = null;
-        while (date == null) {
-            try {
-                System.out.print("날짜 (YYYY-MM-DD): ");
-                date = LocalDate.parse(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
-            }
-        }
-
-        Double amount = null;
-        while (amount == null) {
-            try {
-                System.out.print("금액: ");
-                amount = Double.parseDouble(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
-            }
-        }
-
+        LocalDate date = getDateFromUser();
+        System.out.print("금액: ");
+        double amount = Double.parseDouble(scanner.nextLine());
         String type = (addChoice == 1) ? "수입" : "지출";
         System.out.print("설명: ");
         String description = scanner.nextLine();
         return new Transaction(date, amount, type, description);
+    }
+
+    private LocalDate getDateFromUser() {
+        while (true) {
+            try {
+                System.out.print("날짜 (YYYY-MM-DD): ");
+                return LocalDate.parse(scanner.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("잘못된 입력입니다. 날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
+            }
+        }
     }
 
     public void editTransaction() {
@@ -99,73 +91,57 @@ public class TransactionManager {
         String type = originalTransaction.getType();
         String description = originalTransaction.getDescription();
 
-        System.out.println("********************************");
-        System.out.println("    수정할 항목을 선택하세요    ");
-        System.out.println("********************************");
-        System.out.println("1. 날짜");
-        System.out.println("2. 금액");
-        System.out.println("3. 유형");
-        System.out.println("4. 설명");
-        System.out.println("5. 이전");
-        System.out.println("********************************");
-        System.out.print("입력: ");
-        int editChoice = getUserChoice();
-        if (editChoice == 5) return null;
+        while (true) {
+            System.out.println("********************************");
+            System.out.println("    수정할 항목을 선택하세요    ");
+            System.out.println("********************************");
+            System.out.println("1. 날짜");
+            System.out.println("2. 금액");
+            System.out.println("3. 유형");
+            System.out.println("4. 설명");
+            System.out.println("5. 이전");
+            System.out.println("********************************");
+            System.out.print("입력: ");
+            int editChoice = getUserChoice();
+            if (editChoice == 5) return null;
 
-        switch (editChoice) {
-            case 1 -> date = getUpdatedDate(date);
-            case 2 -> amount = getUpdatedAmount(amount);
-            case 3 -> type = getUpdatedType(type);
-            case 4 -> description = getUpdatedDescription(description);
-            default -> {
-                System.out.println("잘못된 선택입니다. 다시 시도하세요.");
-                return null;
+            switch (editChoice) {
+                case 1 -> date = getUpdatedDate(date);
+                case 2 -> amount = getUpdatedAmount(amount);
+                case 3 -> type = getUpdatedType(type);
+                case 4 -> description = getUpdatedDescription(description);
+                default -> {
+                    System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+                    continue;
+                }
             }
-        }
 
-        return new Transaction(date, amount, type, description);
+            return new Transaction(date, amount, type, description);
+        }
     }
 
     private LocalDate getUpdatedDate(LocalDate originalDate) {
-        LocalDate date = null;
-        while (date == null) {
+        while (true) {
             try {
                 System.out.print("새 날짜 (YYYY-MM-DD, 이전 값: " + originalDate + "): ");
                 String dateInput = scanner.nextLine();
-                date = dateInput.isEmpty() ? originalDate : LocalDate.parse(dateInput);
-            } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+                return dateInput.isEmpty() ? originalDate : LocalDate.parse(dateInput);
+            } catch (DateTimeParseException e) {
+                System.out.println("잘못된 입력입니다. 날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
             }
         }
-        return date;
     }
 
     private double getUpdatedAmount(double originalAmount) {
-        Double amount = null;
-        while (amount == null) {
-            try {
-                System.out.print("새 금액 (이전 값: " + String.format("%.0f", originalAmount) + "원): ");
-                String amountInput = scanner.nextLine();
-                amount = amountInput.isEmpty() ? originalAmount : Double.parseDouble(amountInput);
-            } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
-            }
-        }
-        return amount;
+        System.out.print("새 금액 (이전 값: " + String.format("%.0f", originalAmount) + "원): ");
+        String amountInput = scanner.nextLine();
+        return amountInput.isEmpty() ? originalAmount : Double.parseDouble(amountInput);
     }
 
     private String getUpdatedType(String originalType) {
-        String type = null;
-        while (type == null) {
-            try {
-                System.out.print("새 유형 (수입/지출, 이전 값: " + originalType + "): ");
-                String typeInput = scanner.nextLine();
-                type = typeInput.isEmpty() ? originalType : typeInput;
-            } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
-            }
-        }
-        return type;
+        System.out.print("새 유형 (수입/지출, 이전 값: " + originalType + "): ");
+        String typeInput = scanner.nextLine();
+        return typeInput.isEmpty() ? originalType : typeInput;
     }
 
     private String getUpdatedDescription(String originalDescription) {
