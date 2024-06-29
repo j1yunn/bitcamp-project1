@@ -2,7 +2,7 @@ package bitcamp.project1;
 
 import java.util.Scanner;
 
-public class App {
+public class AppTest {
     private static final Scanner scanner = new Scanner(System.in);
     private static final AccountBook accountBook = new AccountBook();
     private static final TransactionManager transactionManager = new TransactionManager(scanner, accountBook);
