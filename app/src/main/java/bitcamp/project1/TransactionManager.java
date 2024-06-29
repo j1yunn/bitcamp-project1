@@ -15,13 +15,15 @@ public class TransactionManager {
 
     public void addTransaction() {
         while (true) {
-            System.out.println("********************************");
-            System.out.println("              \033[1m\033[31m추가\033[0m               ");
-            System.out.println("********************************");
+            System.out.println("***********************************");
+            System.out.println("        \u001B[33m┌─┐┌┬┐┌┬┐┬┌┬┐┬┌─┐┌┐┌\u001B[0m       ");
+            System.out.println("        \u001B[33m├─┤ ││ │││ │ ││ ││││\u001B[0m       ");
+            System.out.println("        \u001B[33m┴ ┴─┴┘─┴┘┴ ┴ ┴└─┘┘└┘\u001B[0m       ");
+            System.out.println("***********************************");
             System.out.println("1. 수입 추가");
             System.out.println("2. 지출 추가");
             System.out.println("3. 이전");
-            System.out.println("********************************");
+            System.out.println("***********************************");
             System.out.print("입력: ");
 
             int addChoice = getUserChoice();
@@ -92,15 +94,17 @@ public class TransactionManager {
         String description = originalTransaction.getDescription();
 
         while (true) {
-            System.out.println("********************************");
-            System.out.println("    수정할 항목을 선택하세요    ");
-            System.out.println("********************************");
+            System.out.println("***********************************");
+            System.out.println("             \u001B[33m┌─┐┌┬┐┬┌┬┐\u001B[0m             ");
+            System.out.println("             \u001B[33m├┤  │││ │\u001B[0m              ");
+            System.out.println("             \u001B[33m└─┘─┴┘┴ ┴\u001B[0m             ");
+            System.out.println("***********************************");
             System.out.println("1. 날짜");
             System.out.println("2. 금액");
             System.out.println("3. 유형");
             System.out.println("4. 설명");
             System.out.println("5. 이전");
-            System.out.println("********************************");
+            System.out.println("***********************************");
             System.out.print("입력: ");
             int editChoice = getUserChoice();
             if (editChoice == 5) return null;

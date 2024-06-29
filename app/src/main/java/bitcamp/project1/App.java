@@ -27,15 +27,42 @@ public class App {
     }
 
     private static void printMainMenu() {
-        System.out.println("********************************");
-        System.out.println("             \033[1m\033[31m가계부\033[0m              ");
-        System.out.println("********************************");
-        System.out.println("1. 추가");
-        System.out.println("2. 내역");
-        System.out.println("3. 수정");
-        System.out.println("4. 종료");
-        System.out.println("********************************");
-        System.out.print("입력: ");
+        // Print alternating colors for the stars
+        printAlternatingStars();
+
+        System.out.println("\u001B[33m┌─┐┌─┐┌─┐┌─┐┬ ┬┌┐┌┌┬┐  ┌┐ ┌─┐┌─┐┬┌─\u001B[0m");
+        System.out.println("\u001B[33m├─┤│  │  │ ││ ││││ │   ├┴┐│ ││ │├┴┐\u001B[0m");
+        System.out.println("\u001B[33m┴ ┴└─┘└─┘└─┘└─┘┘└┘ ┴   └─┘└─┘└─┘┴ ┴\u001B[0m");
+
+        // Print alternating colors for the stars again
+        printAlternatingStars();
+
+        // Print menu options with specified colors
+        System.out.println("\u001B[33m1.\u001B[0m 추가");
+        System.out.println("\u001B[33m2.\u001B[0m 내역");
+        System.out.println("\u001B[33m3.\u001B[0m 수정");
+        System.out.println("\u001B[34m4. 종료\u001B[0m");
+
+        // Print alternating colors for the stars once more
+        printAlternatingStars();
+
+        // Print the input prompt in yellow
+        System.out.print("\u001B[33m입력: \u001B[0m");
+    }
+
+    private static void printAlternatingStars() {
+        String stars = "***********************************";
+        boolean isYellow = true;
+
+        for (int i = 0; i < stars.length(); i++) {
+            if (isYellow) {
+                System.out.print("\u001B[33m" + stars.charAt(i) + "\u001B[0m");  // 노란색
+            } else {
+                System.out.print("\u001B[34m" + stars.charAt(i) + "\u001B[0m");  // 파란색
+            }
+            isYellow = !isYellow;
+        }
+        System.out.println();
     }
 
     private static int getUserChoice() {
@@ -44,7 +71,7 @@ public class App {
                 return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
-                System.out.print("입력: ");
+                System.out.print("\u001B[33m입력: \u001B[0m");
             }
         }
     }

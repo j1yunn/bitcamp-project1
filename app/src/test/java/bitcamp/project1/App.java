@@ -2,7 +2,7 @@ package bitcamp.project1;
 
 import java.util.Scanner;
 
-public class AppTest {
+public class App {
     private static final Scanner scanner = new Scanner(System.in);
     private static final AccountBook accountBook = new AccountBook();
     private static final TransactionManager transactionManager = new TransactionManager(scanner, accountBook);
@@ -12,10 +12,6 @@ public class AppTest {
         while (true) {
             printMainMenu();
             int choice = getUserChoice();
-
-            if (choice == -1) {
-                continue; // 잘못된 입력이면 루프의 처음으로 돌아감
-            }
 
             switch (choice) {
                 case 1 -> transactionManager.addTransaction();
@@ -32,22 +28,24 @@ public class AppTest {
 
     private static void printMainMenu() {
         System.out.println("********************************");
-        System.out.println("             가계부              ");
+        System.out.println("             \033[1m\033[31m가계부\033[0m              ");
         System.out.println("********************************");
         System.out.println("1. 추가");
         System.out.println("2. 내역");
         System.out.println("3. 수정");
         System.out.println("4. 종료");
         System.out.println("********************************");
+        System.out.print("입력: ");
     }
 
     private static int getUserChoice() {
-        System.out.print("입력: ");
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
-            return -1;
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
+                System.out.print("입력: ");
+            }
         }
     }
 }

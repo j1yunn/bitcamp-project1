@@ -15,16 +15,18 @@ public class TransactionViewer {
 
     public void viewTransactions() {
         while (true) {
-            System.out.println("********************************");
-            System.out.println("              \033[1m\033[31m내역\033[0m               ");
-            System.out.println("********************************");
-            System.out.println("1. 전체 거래 보기");
-            System.out.println("2. 특정 날짜 범위의 거래 보기");
+            System.out.println("***********************************");
+            System.out.println("         \u001B[33m┌┬┐┌─┐┌┬┐┌─┐┬┬  ┌─┐┌\u001B[0m       ");
+            System.out.println("        \u001B[33m┌ ││├┤  │ ├─┤││  └─┐\u001B[0m       ");
+            System.out.println("        \u001B[33m┌─┴┘└─┘ ┴ ┴ ┴┴┴─┘└─┘\u001B[0m       ");
+            System.out.println("***********************************");
+            System.out.println("1. 전체 내역 보기");
+            System.out.println("2. 특정 날짜 범위의 내역 보기");
             System.out.println("3. 수입만 보기");
             System.out.println("4. 지출만 보기");
             System.out.println("5. 총 수입/지출 보기");
             System.out.println("6. 이전");
-            System.out.println("********************************");
+            System.out.println("***********************************");
             System.out.print("입력: ");
 
             int viewChoice = getUserChoice();
@@ -68,13 +70,13 @@ public class TransactionViewer {
 
     private void viewTransactionsByType(String type) {
         while (true) {
-            System.out.println("********************************");
-            System.out.println("          \033[1m\033[31m" + type + " 보기\033[0m           ");
-            System.out.println("********************************");
+            System.out.println("***********************************");
+            System.out.println("             \u001B[33m" + type + " 보기\033[0m             ");
+            System.out.println("***********************************");
             System.out.println("1. 전체 " + type + " 보기");
             System.out.println("2. 특정 날짜 범위의 " + type + " 보기");
             System.out.println("3. 이전");
-            System.out.println("********************************");
+            System.out.println("***********************************");
             System.out.print("입력: ");
 
             int choice = getUserChoice();
